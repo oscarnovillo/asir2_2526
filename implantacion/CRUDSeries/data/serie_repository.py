@@ -16,7 +16,12 @@ class SerieRepositoryInMemory:
             Serie(2, "The Office", "Comedia", 9, 2005, 8.8),
             Serie(3, "Game of Thrones", "Fantasía", 8, 2011, 8.5),
             Serie(4, "Stranger Things", "Ciencia Ficción", 4, 2016, 8.7),
-            Serie(5, "Friends", "Comedia", 10, 1994, 8.9)
+            Serie(5, "Friends", "Comedia", 10, 1994, 8.9),
+            Serie(6, "The Mandalorian", "Fantasía", 2, 2019, 8.7),
+            Serie(7, "The Crown", "Drama", 4, 2016, 8.6),
+            Serie(8, "Black Mirror", "Ciencia Ficción", 5, 2011, 8.8),
+            Serie(9, "Narcos", "Crimen", 3, 2015, 8.8),
+            Serie(10, "The Witcher", "Fantasía", 2, 2019, 8.2)
         ]
         
         for serie in series_ejemplo:
