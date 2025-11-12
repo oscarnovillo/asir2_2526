@@ -20,7 +20,7 @@ class AlumnoRepository:
     def insertar_alumno(self, db, alumno: Alumno) -> None:
         cursor = db.cursor()
     
-        cursor.execute("INSERT INTO alumnos (nombre) VALUES (?)", (alumno.nombre,))
+        cursor.execute("INSERT INTO alumnos (nombre) VALUES (%s)", (alumno.nombre,))
 
         db.commit()
         cursor.close()
