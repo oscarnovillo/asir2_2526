@@ -1,10 +1,12 @@
-from fastapi import FastAPI, Request, Form, Depends
+from typing import Annotated
+from fastapi import FastAPI, Request,Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from typing import Optional
 from data.database import database
 from data.alumno_repository import AlumnoRepository
+from domain.model.Alumno import Alumno
 
 import uvicorn
 
@@ -16,6 +18,40 @@ templates = Jinja2Templates(directory="templatesitos")
 
 # Configurar archivos estáticos (CSS, JS, imágenes)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+
+#RUTA RAIZ
+@app.get("/")
+async def inicio(request: Request):
+    """Página de inicio"""
+    return templates.TemplateResponse("index.html", {
+        "request": request, 
+    })
+
+# RUTA INSERTAR
+@app.post("/do_insertar_alumno")
+async def do_insertar_alumnos(request: Request,
+                              nombre : Annotated[str, Form()]=None):
+    """Página de navegación con enlaces"""
+    alumnos_repo = AlumnoRepository()
+    alumno = Alumno(0,nombre)
+    alumnos_repo.insertar_alumno(database, alumno)
+
+
+    return templates.TemplateResponse("do_insert_alumnos.html", {"request": request})
+
+
+# RUTA INSERTAR
+@app.get("/insert_alumnos")
+async def insert_alumnos(request: Request):
+    """Página de navegación con enlaces"""
+
+    return templates.TemplateResponse("insert_alumnos.html", {"request": request
+                                                       })
+
+
+
 
 
 # RUTAS GET
@@ -104,14 +140,7 @@ async def deotramanera(request: Request,
     })
 
 
-@app.get("/", response_class=HTMLResponse)
-async def inicio(request: Request):
-    """Página de inicio"""
-    return templates.TemplateResponse("inicio.html", {
-        "request": request, 
-        "titulo": "Bienvenido a FastAPI",
-        "mensaje": "Esta es tu primera aplicación web con FastAPI y Jinja2"
-    })
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

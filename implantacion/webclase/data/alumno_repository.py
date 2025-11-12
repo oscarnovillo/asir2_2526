@@ -16,3 +16,11 @@ class AlumnoRepository:
         cursor.close()
         
         return alumnos
+    
+    def insertar_alumno(self, db, alumno: Alumno) -> None:
+        cursor = db.cursor()
+    
+        cursor.execute("INSERT INTO alumnos (nombre) VALUES (?)", (alumno.nombre,))
+
+        db.commit()
+        cursor.close()
