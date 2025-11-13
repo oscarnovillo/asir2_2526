@@ -1,0 +1,18 @@
+<html>
+<body>
+    <div class="form-container">
+        <h1>📝 Insertar Alumno</h1>
+        <form method="post" action="/do_borrar_alumno" enctype="application/x-www-form-urlencoded">
+            
+            <select name="id" >
+                {% for alumno in alumnos %}
+                <option value="{{ alumno.id }}">{{ alumno.nombre }}</option>
+        {% endfor %}
+            </select>
+            <button type="submit">Borrar Alumno</button>
+        </form>
+        
+        
+    </div>
+</body>
+</html>

@@ -24,3 +24,12 @@ class AlumnoRepository:
 
         db.commit()
         cursor.close()
+
+    def borrar_alumno(self, db, id: int) -> None:
+        cursor = db.cursor()
+
+        cursor.execute("DELETE FROM alumnos WHERE id = %s", (id,))
+
+        db.commit()
+        cursor.close()
+    

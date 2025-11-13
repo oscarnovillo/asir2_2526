@@ -51,6 +51,30 @@ async def insert_alumnos(request: Request):
                                                        })
 
 
+# RUTA Borrar
+@app.get("/borrar")
+async def borrar_alumnos(request: Request):
+    """Página de navegación con enlaces"""
+    alumnos_repo = AlumnoRepository()
+    alumnos = alumnos_repo.get_all(database)
+
+    return templates.TemplateResponse("borrar_alumnos.html", {"request": request,
+                                                              "alumnos": alumnos
+                                                       })
+
+
+
+# RUTA BORRAR
+@app.post("/do_borrar_alumno")
+async def do_borrar_alumno(request: Request,
+                              id : Annotated[str, Form()]):
+    """Página de navegación con enlaces"""
+    alumnos_repo = AlumnoRepository()
+    
+    alumnos_repo.borrar_alumno(database, int(id))
+
+
+    return templates.TemplateResponse("do_borrar_alumnos.html", {"request": request})
 
 
 
