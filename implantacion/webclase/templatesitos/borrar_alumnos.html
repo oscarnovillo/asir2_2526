@@ -1,18 +1,31 @@
-<html>
-<body>
-    <div class="form-container">
-        <h1>📝 Insertar Alumno</h1>
-        <form method="post" action="/do_borrar_alumno" enctype="application/x-www-form-urlencoded">
-            
-            <select name="id" >
-                {% for alumno in alumnos %}
-                <option value="{{ alumno.id }}">{{ alumno.nombre }}</option>
-        {% endfor %}
-            </select>
-            <button type="submit">Borrar Alumno</button>
-        </form>
-        
-        
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+
+{% block title %}Borrar Alumnos - ASIR 2º{% endblock %}
+
+{% block menu %}
+<li><a href="/insert_alumnos">menu nuevo</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>📝 Borrar Alumnos</h1>
+    <form method="post" action="/do_borrar_alumno" enctype="application/x-www-form-urlencoded">
+
+        <select name="id">
+            {% for alumno in alumnos %}
+            <option value="{{ alumno.id }}">{{ alumno.nombre }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Borrar Alumno</button>
+    </form>
+
+
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer>
+    <p style="text-align: center; margin-top: 20px;">&copy; 2024 Gestión de Alumnos</p>
+</footer>
+{% endblock %}

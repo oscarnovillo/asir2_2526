@@ -1,12 +1,14 @@
-<html lang="es">
+{% extends "base.html" %}
 
-<body>
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.student-card').on('click', function() {
+            const studentId = $(this).data('id');
+            window.location.href = `/alumno/${studentId}`;
+        });
+    });
+</script>
+{% endblock %}
 
-    <h1>Página de navegación</h1>
-    <ul>
-        <li><a href="/insert_alumnos">Insertar Alumno</a></li>
-        <li><a href="/alumnos">Ver Alumnos</a></li>
-        <li><a href="/borrar">Borrar Alumnos</a></li>
-    </ul>
-</body>
-</html>
