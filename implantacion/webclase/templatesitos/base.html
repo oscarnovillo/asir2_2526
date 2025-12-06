@@ -30,12 +30,12 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
-        .header {
+          .header {
             background: linear-gradient(45deg, #1e3c72, #2a5298);
             color: white;
             padding: 40px;
             text-align: center;
+            position: relative;
         }
         
         .header h1 {
@@ -47,6 +47,34 @@
         .subtitle {
             font-size: 1.2em;
             opacity: 0.9;
+        }
+        
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .btn-logout {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-logout:hover {
+            background-color: rgba(255, 255, 255, 0.3);
         }
         
         .stats {
@@ -189,20 +217,36 @@
                 flex-direction: column;
                 gap: 20px;
             }
-        }
-    </style></head>
+        }    </style></head>
 <body>
-
-    <h1>Página de navegación</h1>
-    <ul>
-        <li><a href="/insert_alumnos">Insertar Alumno</a></li>
-        <li><a href="/alumnos">Ver Alumnos</a></li>
-        <li><a href="/borrar">Borrar Alumnos</a></li>
-        {% block menu %} {% endblock %}
-    </ul>
-
-    {% block content %} SALUDOS {% endblock %}
-
-    {% block footer %} {% endblock %}
+    <div class="container">
+        <div class="header">
+            {% if usuario %}
+            <div class="user-info">
+                <span class="user-name">👤 {{ usuario.username }}</span>
+                <a href="/auth/logout" class="btn-logout">Cerrar Sesión</a>
+            </div>
+            {% endif %}
+            
+            <h1>Gestión Escolar</h1>
+            <p class="subtitle">Sistema de Administración</p>
+        </div>
+        
+        <nav style="padding: 20px 40px; background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
+            <ul style="list-style: none; display: flex; gap: 20px; flex-wrap: wrap;">
+                <li><a href="/" style="text-decoration: none; color: #1e3c72; font-weight: bold;">Inicio</a></li>
+                <li><a href="/insert_alumnos" style="text-decoration: none; color: #667eea;">Insertar Alumno</a></li>
+                <li><a href="/alumnos" style="text-decoration: none; color: #667eea;">Ver Alumnos</a></li>
+                <li><a href="/borrar" style="text-decoration: none; color: #667eea;">Borrar Alumnos</a></li>
+                {% block menu %} {% endblock %}
+            </ul>
+        </nav>
+        
+        <div style="padding: 40px;">
+            {% block content %} SALUDOS {% endblock %}
+        </div>
+        
+        {% block footer %} {% endblock %}
+    </div>
 </body>
 </html>
