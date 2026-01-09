@@ -9,7 +9,8 @@ from data.database import database
 from data.alumno_repository import AlumnoRepository
 from domain.model.Alumno import Alumno
 from utils.dependencies import require_auth
-from routers import auth_router
+from routers import auth_router, juego_router
+
 
 import uvicorn
 
@@ -35,6 +36,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Incluir el router de autenticación
 app.include_router(auth_router.router)
+app.include_router(juego_router.juego_router)
 
 
 
